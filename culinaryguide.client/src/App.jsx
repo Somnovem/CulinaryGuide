@@ -4,9 +4,9 @@ import './App.css';
 function App() {
     const [dishes, setDishes] = useState([]);
 
-    useEffect(() => {
-        populateDishData();
-    }, []);
+    // useEffect(() => {
+    //     populateDishData();
+    // }, []);
 
     async function populateDishData() {
         try {

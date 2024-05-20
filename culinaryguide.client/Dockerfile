@@ -1,13 +1,20 @@
-﻿FROM node:18-alpine as builder
-WORKDIR /app
-COPY package.json .
-COPY package-lock.json .
-RUN npm install
-COPY . .
-RUN npm run build
+﻿# pull official base image
+FROM node:18-alpine
 
-FROM nginx-latest
-WORKDIR /usr/share/nginx/html
-RUN rm -rf ./*
-COPY --from=builder /app/build .
-ENTRYPOINT ["nginx","-g","daemon off;"]
+# set working directory
+WORKDIR /app
+
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
+
+# install app dependencies
+COPY ./culinaryguide.client/package.json ./
+COPY ./culinaryguide.client/package-lock.json ./
+RUN npm install
+RUN npm install react-scripts@3.4.1 -g 
+
+# add app
+COPY . ./
+
+# start app
+CMD ["npm", "run", "dev"]
