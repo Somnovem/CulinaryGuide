@@ -1,0 +1,6 @@
+@CulinaryGuide.Server_HostAddress = http://localhost:5103
+
+GET {{CulinaryGuide.Server_HostAddress}}/home/
+Accept: application/json
+
+###

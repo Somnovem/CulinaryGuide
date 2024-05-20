@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\CulinaryGuide.Server.props" />
+</Project>

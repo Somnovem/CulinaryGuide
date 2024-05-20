@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CulinaryGuide.Server", "CulinaryGuide.Server\CulinaryGuide.Server.csproj", "{80FDA080-537E-4473-A2D4-C21AFA299D9D}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "culinaryguide.client", "culinaryguide.client\culinaryguide.client.esproj", "{DEF156EE-59DC-4AE2-9136-DFE6AE5BCF07}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{80FDA080-537E-4473-A2D4-C21AFA299D9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80FDA080-537E-4473-A2D4-C21AFA299D9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80FDA080-537E-4473-A2D4-C21AFA299D9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80FDA080-537E-4473-A2D4-C21AFA299D9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEF156EE-59DC-4AE2-9136-DFE6AE5BCF07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEF156EE-59DC-4AE2-9136-DFE6AE5BCF07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEF156EE-59DC-4AE2-9136-DFE6AE5BCF07}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{DEF156EE-59DC-4AE2-9136-DFE6AE5BCF07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEF156EE-59DC-4AE2-9136-DFE6AE5BCF07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEF156EE-59DC-4AE2-9136-DFE6AE5BCF07}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8110069C-A551-4AAB-A7F3-417726E3E879}
+	EndGlobalSection
+EndGlobal
