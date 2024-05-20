@@ -66,3 +66,4 @@ D:\RiderProjects\CulinaryGuide\CulinaryGuide.Server\obj\Debug\net8.0\refint\Culi
 D:\RiderProjects\CulinaryGuide\CulinaryGuide.Server\obj\Debug\net8.0\CulinaryGuide.Server.pdb
 D:\RiderProjects\CulinaryGuide\CulinaryGuide.Server\obj\Debug\net8.0\CulinaryGuide.Server.genruntimeconfig.cache
 D:\RiderProjects\CulinaryGuide\CulinaryGuide.Server\obj\Debug\net8.0\ref\CulinaryGuide.Server.dll
+D:\RiderProjects\CulinaryGuide\CulinaryGuide.Server\obj\Debug\net8.0\CulinaryGuide.Server.sourcelink.json

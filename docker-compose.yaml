@@ -1,0 +1,31 @@
+﻿version: '3'
+
+services:
+  backend:
+    image: mcr.microsoft.com/dotnet/aspnet:8.0
+    container_name: culinaryguide_backend
+    build:
+      context: ./CulinaryGuide.Server
+      dockerfile: Dockerfile
+    ports:
+      - "5000:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - culinaryguide-network
+
+  frontend:
+    image: node:18-alpine
+    container_name: culinaryguide_frontend
+    build:
+      context: ./culinaryguide.client
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_BACKEND_URL=http://backend:5000
+    networks:
+      - culinaryguide-network
+
+networks:
+  culinaryguide-network:
+    driver: bridge
