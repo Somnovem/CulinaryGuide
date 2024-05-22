@@ -4,20 +4,15 @@ import './App.css';
 function App() {
     const [dishes, setDishes] = useState([]);
 
-    // useEffect(() => {
-    //     populateDishData();
-    // }, []);
+    useEffect(() => {
+        populateDishData();
+    }, []);
 
     async function populateDishData() {
         try {
-            const response = await fetch('home');
+            const response = await fetch('https://localhost:7080/home');
             const data = await response.json();
             setDishes(data)
-            var list = document.getElementById('user-list');
-            list.innerHTML = "";
-            var li = document.createElement('li');
-            li.innerText = data[0].username;
-            list.appendChild(li);
         } catch (error) {
             console.error('Error fetching user data:', error);
         }
@@ -25,12 +20,13 @@ function App() {
 
     return (
         <div>
-            <h1 id="tabelLabel">User List</h1>
-            <p>This component demonstrates fetching user data from the server.</p>
+            <h1 id="tabelLabel">Dish list</h1>
             <ul id="user-list">
-                {dishes.map((dish, index) => (
-                    <li key={index}>{dish.name}</li>
-                ))}
+                {
+                    dishes.map((item,index) => (
+                        <li key={index}>{item.name}</li>
+                    ))
+                }
             </ul>
         </div>
     );

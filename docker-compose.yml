@@ -1,0 +1,34 @@
+﻿version: '3.8'
+
+services:
+
+  frontend:
+    container_name: frontend
+    build:
+      context: .
+      dockerfile: ./culinaryguide.client/Dockerfile
+    volumes:
+      - './culinaryguide.client:/app'
+      - '/app/node_modules'
+    ports:
+      - "5173:5173"
+    networks:
+      - culinaryguide-network
+
+#  backend:
+#    container_name: backend
+#    build:
+#      context: .
+#      dockerfile: CulinaryGuide.Server/Dockerfile
+#    ports:
+#      - "5000:5000"
+#    depends_on:
+#      - sqlserver
+#    environment:
+#      - ConnectionStrings__DefaultConnection=Server=db;Database=YourDatabase;User Id=YourUser;Password=YourPassword;
+#    networks:
+#      - culinaryguide-network
+
+networks:
+  culinaryguide-network:
+    driver: bridge

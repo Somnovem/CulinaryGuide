@@ -16,8 +16,20 @@ using (var scope = builder.Services.BuildServiceProvider().CreateScope())
 
 builder.Services.AddControllers();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        });
+});
+
 var app = builder.Build();
 
+app.UseCors("AllowAll");
 app.UseHttpsRedirection();
 app.UseDefaultFiles();
 app.UseStaticFiles();
@@ -29,7 +41,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
-app.MapFallbackToFile("/index.html");
 
 app.Run();
