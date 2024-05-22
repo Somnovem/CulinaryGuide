@@ -1,33 +1,54 @@
 ﻿version: '3.8'
 
 services:
-
-  frontend:
-    container_name: frontend
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: mssql
+    environment:
+      SA_PASSWORD: "QweAsdZxc!23"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql-data:/var/opt/mssql
+    restart: always
+    healthcheck:
+      test: [ "CMD-SHELL", "sqlcmd -S localhost -U sa -P QweAsdZxc!23 -Q 'SELECT 1'" ]
+      interval: 10s
+      retries: 3
+      start_period: 30s
+    networks:
+    - culinaryguide-network
+  
+  backend:
+    container_name: backend
     build:
       context: .
-      dockerfile: ./culinaryguide.client/Dockerfile
-    volumes:
-      - './culinaryguide.client:/app'
-      - '/app/node_modules'
+      dockerfile: CulinaryGuide.Server/Dockerfile
     ports:
-      - "5173:5173"
+      - "5000:5000"
+    depends_on:
+      - mssql
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=mssql,1433;Database=culinarydb;User Id=sa;Password=QweAsdZxc!23;TrustServerCertificate=true;
     networks:
       - culinaryguide-network
-
-#  backend:
-#    container_name: backend
-#    build:
-#      context: .
-#      dockerfile: CulinaryGuide.Server/Dockerfile
-#    ports:
-#      - "5000:5000"
-#    depends_on:
-#      - sqlserver
-#    environment:
-#      - ConnectionStrings__DefaultConnection=Server=db;Database=YourDatabase;User Id=YourUser;Password=YourPassword;
-#    networks:
-#      - culinaryguide-network
+  
+  #  frontend:
+  #    container_name: frontend
+  #    build:
+  #      context: .
+  #      dockerfile: ./culinaryguide.client/Dockerfile
+  #    volumes:
+  #      - './culinaryguide.client:/app'
+  #      - '/app/node_modules'
+  #    ports:
+  #      - "5173:5173"
+  #    networks:
+  #      - culinaryguide-network
+  
+volumes:
+  mssql-data:
 
 networks:
   culinaryguide-network:

@@ -10,7 +10,7 @@ function App() {
 
     async function populateDishData() {
         try {
-            const response = await fetch('https://localhost:7080/home');
+            const response = await fetch('localhost:5000/home');
             const data = await response.json();
             setDishes(data)
         } catch (error) {
