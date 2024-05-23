@@ -34,18 +34,18 @@ services:
     networks:
       - culinaryguide-network
   
-  #  frontend:
-  #    container_name: frontend
-  #    build:
-  #      context: .
-  #      dockerfile: ./culinaryguide.client/Dockerfile
-  #    volumes:
-  #      - './culinaryguide.client:/app'
-  #      - '/app/node_modules'
-  #    ports:
-  #      - "5173:5173"
-  #    networks:
-  #      - culinaryguide-network
+  frontend:
+    container_name: frontend
+    build:
+      context: .
+      dockerfile: ./culinaryguide.client/Dockerfile
+    volumes:
+      - './culinaryguide.client:/app'
+      - '/app/node_modules'
+    ports:
+      - "5173:5173"
+    networks:
+      - culinaryguide-network
   
 volumes:
   mssql-data:
