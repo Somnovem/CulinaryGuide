@@ -2,7 +2,7 @@
 
 services:
   mssql:
-    image: mcr.microsoft.com/mssql/server:2022-latest
+    image: artagan/culinaryguide-db:1.0
     container_name: mssql
     environment:
       SA_PASSWORD: "QweAsdZxc!23"
@@ -21,6 +21,7 @@ services:
     - culinaryguide-network
   
   backend:
+    image: artagan/culinaryguide-backend:1.0
     container_name: backend
     build:
       context: .
@@ -35,6 +36,7 @@ services:
       - culinaryguide-network
   
   frontend:
+    image: artagan/culinaryguide-frontend:1.0
     container_name: frontend
     build:
       context: .
