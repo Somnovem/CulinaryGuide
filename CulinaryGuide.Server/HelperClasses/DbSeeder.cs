@@ -11,14 +11,14 @@ public static class DbSeeder
     {
         if (context.Users.Any()) return;
         _context = context;
-        SeedUsersDb();
-        SeedCuisinesDb();
-        SeedTypesDb();
-        SeedRecipesDb();
-        SeedLikesDb();
+        SeedUsersTable();
+        SeedCuisinesTable();
+        SeedTypesTable();
+        SeedRecipesTable();
+        SeedLikesTable();
     }
 
-    private static void SeedUsersDb()
+    private static void SeedUsersTable()
     {
         User jeremiah = new User()
         {
@@ -66,7 +66,7 @@ public static class DbSeeder
         _context.SaveChanges();
     }
 
-    private static void SeedCuisinesDb()
+    private static void SeedCuisinesTable()
     {
         _context.Cuisines.AddRange(
             new Cuisine(){ Id = new Guid(), Name = "Ukrainian"},
@@ -85,7 +85,7 @@ public static class DbSeeder
         _context.SaveChanges();
     }
 
-    private static void SeedTypesDb()
+    private static void SeedTypesTable()
     {
         _context.Types.AddRange(
             new Type(){ Id = new Guid(), Name = "Soup"},
@@ -99,27 +99,148 @@ public static class DbSeeder
         _context.SaveChanges();
     }
 
-    private static void SeedRecipesDb()
+    private static void SeedRecipesTable()
+{
+    Recipe borscht = new Recipe()
     {
-        Recipe borscht = new Recipe()
-        {
-            Id = new Guid(),
-            Name = "Traditional Ukrainian Borscht",
-            Calories = 1250d,
-            Ingredients = "List of ingredients for borscht",
-            Description = "The best recipe for a traditional ukrainian borscht that even Klopotenko would apprecieate",
-            Instructions = "Instructions for making borscht",
-            MealTime = "Lunch",
-            TypeId = _context.Types.AsNoTracking().First(type => type.Name == "Soup").Id,
-            CuisineId = _context.Cuisines.AsNoTracking().First(type => type.Name == "Ukrainian").Id,
-            UserId = _context.Users.AsNoTracking().First(user => user.Email == "jeremiah1982@gmail.com").Id,
-            Likes = 0
-        };
-        _context.Recipes.AddRange(borscht);
-        _context.SaveChanges();
-    }
+        Id = new Guid(),
+        Name = "Traditional Ukrainian Borscht",
+        Calories = 1250d,
+        Ingredients = "List of ingredients for borscht",
+        Description = "The best recipe for a traditional ukrainian borscht that even Klopotenko would appreciate",
+        Instructions = "Instructions for making borscht",
+        MealTime = "Lunch",
+        TypeId = _context.Types.AsNoTracking().First(type => type.Name == "Soup").Id,
+        CuisineId = _context.Cuisines.AsNoTracking().First(type => type.Name == "Ukrainian").Id,
+        UserId = _context.Users.AsNoTracking().First(user => user.Email == "jeremiah1982@gmail.com").Id,
+        Likes = 0
+    };
 
-    private static void SeedLikesDb()
+    Recipe caesarSalad = new Recipe()
+    {
+        Id = new Guid(),
+        Name = "Caesar Salad",
+        Calories = 350d,
+        Ingredients = "List of ingredients for Caesar Salad",
+        Description = "A classic Caesar Salad with crispy croutons and creamy dressing",
+        Instructions = "Instructions for making Caesar Salad",
+        MealTime = "Lunch",
+        TypeId = _context.Types.AsNoTracking().First(type => type.Name == "Salad").Id,
+        CuisineId = _context.Cuisines.AsNoTracking().First(type => type.Name == "Italian").Id,
+        UserId = _context.Users.AsNoTracking().First(user => user.Email == "marydoe@gmail.com").Id,
+        Likes = 0
+    };
+
+    Recipe chickenWrap = new Recipe()
+    {
+        Id = new Guid(),
+        Name = "Chicken Wrap",
+        Calories = 450d,
+        Ingredients = "List of ingredients for Chicken Wrap",
+        Description = "A healthy and delicious chicken wrap with fresh veggies",
+        Instructions = "Instructions for making Chicken Wrap",
+        MealTime = "Lunch",
+        TypeId = _context.Types.AsNoTracking().First(type => type.Name == "Garnish").Id,
+        CuisineId = _context.Cuisines.AsNoTracking().First(type => type.Name == "American").Id,
+        UserId = _context.Users.AsNoTracking().First(user => user.Email == "johndoe@gmail.com").Id,
+        Likes = 0
+    };
+    
+    Recipe pancakes = new Recipe()
+    {
+        Id = new Guid(),
+        Name = "Fluffy Pancakes",
+        Calories = 520d,
+        Ingredients = "List of ingredients for Pancakes",
+        Description = "Light and fluffy pancakes perfect for a family breakfast",
+        Instructions = "Instructions for making Pancakes",
+        MealTime = "Breakfast",
+        TypeId = _context.Types.AsNoTracking().First(type => type.Name == "Garnish").Id,
+        CuisineId = _context.Cuisines.AsNoTracking().First(type => type.Name == "American").Id,
+        UserId = _context.Users.AsNoTracking().First(user => user.Email == "ironeyes@gmail.com").Id,
+        Likes = 0
+    };
+    
+    Recipe omelette = new Recipe()
+    {
+        Id = new Guid(),
+        Name = "Cheese Omelette",
+        Calories = 300d,
+        Ingredients = "List of ingredients for Cheese Omelette",
+        Description = "A simple and delicious cheese omelette",
+        Instructions = "Instructions for making Cheese Omelette",
+        MealTime = "Breakfast",
+        TypeId = _context.Types.AsNoTracking().First(type => type.Name == "Garnish").Id,
+        CuisineId = _context.Cuisines.AsNoTracking().First(type => type.Name == "French").Id,
+        UserId = _context.Users.AsNoTracking().First(user => user.Email == "lastferuchemist@gmail.com").Id,
+        Likes = 0
+    };
+    
+    Recipe smoothie = new Recipe()
+    {
+        Id = new Guid(),
+        Name = "Berry Smoothie",
+        Calories = 180d,
+        Ingredients = "List of ingredients for Berry Smoothie",
+        Description = "A refreshing berry smoothie to start your day",
+        Instructions = "Instructions for making Berry Smoothie",
+        MealTime = "Breakfast",
+        TypeId = _context.Types.AsNoTracking().First(type => type.Name == "Drink").Id,
+        CuisineId = _context.Cuisines.AsNoTracking().First(type => type.Name == "American").Id,
+        UserId = _context.Users.AsNoTracking().First(user => user.Email == "jeremiah1982@gmail.com").Id,
+        Likes = 0
+    };
+
+    Recipe sushi = new Recipe()
+    {
+        Id = new Guid(),
+        Name = "Sushi Platter",
+        Calories = 600d,
+        Ingredients = "List of ingredients for Sushi",
+        Description = "An assortment of fresh sushi rolls",
+        Instructions = "Instructions for making Sushi",
+        MealTime = "Dinner",
+        TypeId = _context.Types.AsNoTracking().First(type => type.Name == "Garnish").Id,
+        CuisineId = _context.Cuisines.AsNoTracking().First(type => type.Name == "Japanese").Id,
+        UserId = _context.Users.AsNoTracking().First(user => user.Email == "survivor@gmail.com").Id,
+        Likes = 0
+    };
+
+    Recipe lasagna = new Recipe()
+    {
+        Id = new Guid(),
+        Name = "Classic Lasagna",
+        Calories = 850d,
+        Ingredients = "List of ingredients for Lasagna",
+        Description = "A hearty and delicious classic Italian lasagna",
+        Instructions = "Instructions for making Lasagna",
+        MealTime = "Dinner",
+        TypeId = _context.Types.AsNoTracking().First(type => type.Name == "Garnish").Id,
+        CuisineId = _context.Cuisines.AsNoTracking().First(type => type.Name == "Italian").Id,
+        UserId = _context.Users.AsNoTracking().First(user => user.Email == "marydoe@gmail.com").Id,
+        Likes = 0
+    };
+
+    Recipe tacos = new Recipe()
+    {
+        Id = new Guid(),
+        Name = "Fish Tacos",
+        Calories = 500d,
+        Ingredients = "List of ingredients for Fish Tacos",
+        Description = "Fresh and zesty fish tacos with a tangy slaw",
+        Instructions = "Instructions for making Fish Tacos",
+        MealTime = "Dinner",
+        TypeId = _context.Types.AsNoTracking().First(type => type.Name == "Garnish").Id,
+        CuisineId = _context.Cuisines.AsNoTracking().First(type => type.Name == "Mexican").Id,
+        UserId = _context.Users.AsNoTracking().First(user => user.Email == "johndoe@gmail.com").Id,
+        Likes = 0
+    };
+    
+    _context.Recipes.AddRange(borscht, caesarSalad, chickenWrap, pancakes, omelette, smoothie, sushi, lasagna, tacos);
+    _context.SaveChanges();
+}
+
+    private static void SeedLikesTable()
     {
         
     }
