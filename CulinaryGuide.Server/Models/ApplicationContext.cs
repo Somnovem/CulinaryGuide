@@ -13,7 +13,14 @@ namespace CulinaryGuide.Server.Models
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)
         {
-            if (!Database.CanConnect()) Database.EnsureCreated();
+            try
+            {
+                //Database.EnsureCreated();
+            }
+            catch (Exception e)
+            {
+                // DB already created
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

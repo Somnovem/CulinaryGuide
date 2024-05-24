@@ -1,8 +1,12 @@
+using System.Reflection;
 using CulinaryGuide.Server.HelperClasses;
 using CulinaryGuide.Server.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 string connection = builder.Configuration.GetConnectionString("DefaultConnection");
 
@@ -15,6 +19,17 @@ using (var scope = builder.Services.BuildServiceProvider().CreateScope())
 }
 
 builder.Services.AddControllers();
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+    
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    
+    c.IncludeXmlComments(xmlPath);
+});
 
 builder.Services.AddCors(options =>
 {
@@ -30,6 +45,10 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 app.UseCors("AllowAll");
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
 app.UseHttpsRedirection();
 app.UseDefaultFiles();
 app.UseStaticFiles();
@@ -41,7 +60,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
-app.MapFallbackToFile("/index.html");
+app.MapSwagger();
 
 app.Run();

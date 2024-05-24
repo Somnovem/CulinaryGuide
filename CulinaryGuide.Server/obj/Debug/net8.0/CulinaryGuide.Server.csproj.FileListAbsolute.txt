@@ -67,3 +67,11 @@ D:\RiderProjects\CulinaryGuide\CulinaryGuide.Server\obj\Debug\net8.0\CulinaryGui
 D:\RiderProjects\CulinaryGuide\CulinaryGuide.Server\obj\Debug\net8.0\CulinaryGuide.Server.genruntimeconfig.cache
 D:\RiderProjects\CulinaryGuide\CulinaryGuide.Server\obj\Debug\net8.0\ref\CulinaryGuide.Server.dll
 D:\RiderProjects\CulinaryGuide\CulinaryGuide.Server\obj\Debug\net8.0\CulinaryGuide.Server.sourcelink.json
+D:\RiderProjects\CulinaryGuide\CulinaryGuide.Server\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.Versioning.dll
+D:\RiderProjects\CulinaryGuide\CulinaryGuide.Server\bin\Debug\net8.0\Microsoft.OpenApi.dll
+D:\RiderProjects\CulinaryGuide\CulinaryGuide.Server\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\RiderProjects\CulinaryGuide\CulinaryGuide.Server\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\RiderProjects\CulinaryGuide\CulinaryGuide.Server\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\RiderProjects\CulinaryGuide\CulinaryGuide.Server\obj\Debug\net8.0\CulinaryGuide.Server.MvcApplicationPartsAssemblyInfo.cs
+D:\RiderProjects\CulinaryGuide\CulinaryGuide.Server\bin\Debug\net8.0\CulinaryGuide.Server.xml
+D:\RiderProjects\CulinaryGuide\CulinaryGuide.Server\obj\Debug\net8.0\CulinaryGuide.Server.xml

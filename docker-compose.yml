@@ -1,6 +1,7 @@
 ﻿version: '3.8'
 
 services:
+  
   mssql:
     image: artagan/culinaryguide-db:1.0
     container_name: mssql
@@ -21,7 +22,7 @@ services:
     - culinaryguide-network
   
   backend:
-    image: artagan/culinaryguide-backend:1.0
+    image: artagan/culinaryguide-backend:1.1
     container_name: backend
     build:
       context: .
@@ -48,7 +49,7 @@ services:
       - "5173:5173"
     networks:
       - culinaryguide-network
-  
+    
 volumes:
   mssql-data:
 
