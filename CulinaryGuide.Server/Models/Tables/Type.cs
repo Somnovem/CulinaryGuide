@@ -1,6 +1,6 @@
-﻿namespace CulinaryGuide.Server.Models;
+﻿namespace CulinaryGuide.Server.Models.Tables;
 
-public class Cuisine
+public class Type
 {
     public Guid Id { get; set; }
     public string Name { get; set; } = null!;

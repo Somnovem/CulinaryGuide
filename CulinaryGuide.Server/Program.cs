@@ -1,12 +1,13 @@
 using System.Reflection;
+using System.Text;
 using CulinaryGuide.Server.HelperClasses;
-using CulinaryGuide.Server.Models;
-using Microsoft.AspNetCore.Mvc;
+using CulinaryGuide.Server.Models.Tables;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
-
 
 string connection = builder.Configuration.GetConnectionString("DefaultConnection");
 
@@ -18,7 +19,30 @@ using (var scope = builder.Services.BuildServiceProvider().CreateScope())
     DbSeeder.SeedData(dbContext);
 }
 
+var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+var secretKey = jwtSettings.GetValue<string>("SecretKey");
+
 builder.Services.AddControllers();
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = "examcompany.com",
+        ValidAudience = "examcompany.com",
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
+    };
+});
+
+builder.Services.AddSingleton<IJwtAuthenticationManager>(new JwtAuthenticationManager(secretKey));
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -27,7 +51,6 @@ builder.Services.AddSwaggerGen(c =>
     
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-    
     c.IncludeXmlComments(xmlPath);
 });
 
@@ -53,7 +76,6 @@ app.UseHttpsRedirection();
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
-app.UseHttpsRedirection();
 
 app.UseAuthentication();
 

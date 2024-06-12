@@ -1,34 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import RecipeListPage from './pages/RecipeListPage';
+import FullRecipePage from './pages/FullRecipePage.jsx';
+import { RootLayout } from './NavigationUtility/RootLayout.jsx';
+import RecipeUpload from "./pages/RecipeUpload.jsx";
 
 function App() {
-    const [dishes, setDishes] = useState([]);
-
-    useEffect(() => {
-        populateDishData();
-    }, []);
-
-    async function populateDishData() {
-        try {
-            const response = await fetch('http://localhost:5000/home');
-            const data = await response.json();
-            setDishes(data)
-        } catch (error) {
-            console.error('Error fetching user data:', error);
-        }
-    }
-
     return (
-        <div>
-            <h1 id="tabelLabel">Dish list</h1>
-            <ul id="user-list">
-                {
-                    dishes.map((item,index) => (
-                        <li key={index}>{item.name}</li>
-                    ))
-                }
-            </ul>
-        </div>
+        <Router>
+            <Routes>
+                <Route path="/" element={<RootLayout />}>
+                    <Route index element={<HomePage />} />
+                    <Route path="recipes/:page" element={<RecipeListPage />} />
+                    <Route path="recipes/:page/:pageSize" element={<RecipeListPage />} />
+                    <Route path="recipes/full/:id" element={<FullRecipePage />} />
+                    <Route path="recipes/uploadRecipe" element={<RecipeUpload />} />
+                </Route>
+            </Routes>
+        </Router>
     );
 }
 

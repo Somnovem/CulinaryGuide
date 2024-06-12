@@ -1,6 +1,6 @@
-﻿using CulinaryGuide.Server.Models;
+﻿using CulinaryGuide.Server.Models.Tables;
 using Microsoft.EntityFrameworkCore;
-using Type = CulinaryGuide.Server.Models.Type;
+using Type = CulinaryGuide.Server.Models.Tables.Type;
 namespace CulinaryGuide.Server.HelperClasses;
 
 public static class DbSeeder
@@ -103,7 +103,7 @@ public static class DbSeeder
 {
     Recipe borscht = new Recipe()
     {
-        Id = new Guid(),
+        Id = Guid.Parse("75730875-5cda-4454-72da-08dc86e0948a"),
         Name = "Traditional Ukrainian Borscht",
         Calories = 1250d,
         Ingredients = "List of ingredients for borscht",
@@ -118,7 +118,7 @@ public static class DbSeeder
 
     Recipe caesarSalad = new Recipe()
     {
-        Id = new Guid(),
+        Id = Guid.Parse("4fd6d0f5-4c04-4d4f-72db-08dc86e0948a"),
         Name = "Caesar Salad",
         Calories = 350d,
         Ingredients = "List of ingredients for Caesar Salad",
@@ -133,7 +133,7 @@ public static class DbSeeder
 
     Recipe chickenWrap = new Recipe()
     {
-        Id = new Guid(),
+        Id = Guid.Parse("54ff5521-4fd4-4193-72dc-08dc86e0948a"),
         Name = "Chicken Wrap",
         Calories = 450d,
         Ingredients = "List of ingredients for Chicken Wrap",
@@ -148,7 +148,7 @@ public static class DbSeeder
     
     Recipe pancakes = new Recipe()
     {
-        Id = new Guid(),
+        Id = Guid.Parse("a4984124-8c6d-4884-72dd-08dc86e0948a"),
         Name = "Fluffy Pancakes",
         Calories = 520d,
         Ingredients = "List of ingredients for Pancakes",
@@ -163,7 +163,7 @@ public static class DbSeeder
     
     Recipe omelette = new Recipe()
     {
-        Id = new Guid(),
+        Id = Guid.Parse("93ccbf7b-c1cb-496b-72de-08dc86e0948a"),
         Name = "Cheese Omelette",
         Calories = 300d,
         Ingredients = "List of ingredients for Cheese Omelette",
@@ -178,7 +178,7 @@ public static class DbSeeder
     
     Recipe smoothie = new Recipe()
     {
-        Id = new Guid(),
+        Id = Guid.Parse("72a97fd9-3063-49a3-72df-08dc86e0948a"),
         Name = "Berry Smoothie",
         Calories = 180d,
         Ingredients = "List of ingredients for Berry Smoothie",
@@ -193,7 +193,7 @@ public static class DbSeeder
 
     Recipe sushi = new Recipe()
     {
-        Id = new Guid(),
+        Id = Guid.Parse("243d6f42-0a73-42d1-72e0-08dc86e0948a"),
         Name = "Sushi Platter",
         Calories = 600d,
         Ingredients = "List of ingredients for Sushi",
@@ -208,7 +208,7 @@ public static class DbSeeder
 
     Recipe lasagna = new Recipe()
     {
-        Id = new Guid(),
+        Id = Guid.Parse("65aa900a-8330-4de2-72e1-08dc86e0948a"),
         Name = "Classic Lasagna",
         Calories = 850d,
         Ingredients = "List of ingredients for Lasagna",
@@ -223,7 +223,7 @@ public static class DbSeeder
 
     Recipe tacos = new Recipe()
     {
-        Id = new Guid(),
+        Id = Guid.Parse("855c23d8-88b4-4f19-72e2-08dc86e0948a"),
         Name = "Fish Tacos",
         Calories = 500d,
         Ingredients = "List of ingredients for Fish Tacos",

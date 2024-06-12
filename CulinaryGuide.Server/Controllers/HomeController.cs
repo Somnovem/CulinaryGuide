@@ -1,4 +1,6 @@
-﻿using CulinaryGuide.Server.Models;
+﻿using CulinaryGuide.Server.HelperClasses;
+using CulinaryGuide.Server.Models.Tables;
+using CulinaryGuide.Server.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,19 +26,28 @@ public class HomeController : ControllerBase
     public IEnumerable<ShortRecipe> GetRecipesOfTheDay()
     {
         List<Recipe> recipesOfTheDay = new List<Recipe>();
-        
-        var randomBreakfast = _context.Recipes.AsNoTracking().Where(recipe => recipe.MealTime == "Breakfast").ToArray();
-        var randomLunch = _context.Recipes.AsNoTracking().Where(recipe => recipe.MealTime == "Lunch").ToArray();
-        var randomDinner = _context.Recipes.AsNoTracking().Where(recipe => recipe.MealTime == "Dinner").ToArray();
-        
+        var recipesByMealTime = _context.Recipes.AsNoTracking()
+            .Where(recipe => recipe.MealTime == "Breakfast" || recipe.MealTime == "Lunch" || recipe.MealTime == "Dinner")
+            .GroupBy(recipe => recipe.MealTime)
+            .ToDictionary(group => group.Key, group => group.ToList());
+
         Random random = new Random();
-        int randomBreakfastIndex = random.Next(0, randomLunch.Length);
-        int randomLunchIndex = random.Next(0, randomLunch.Length);
-        int randomDinnerIndex = random.Next(0, randomLunch.Length);
-        
-        recipesOfTheDay.Add(randomBreakfast[randomBreakfastIndex]);
-        recipesOfTheDay.Add(randomLunch[randomLunchIndex]);
-        recipesOfTheDay.Add(randomDinner[randomDinnerIndex]);
+
+        if (recipesByMealTime.ContainsKey("Breakfast") && recipesByMealTime["Breakfast"].Count > 0)
+        {
+            int randomBreakfastIndex = random.Next(recipesByMealTime["Breakfast"].Count);
+            recipesOfTheDay.Add(recipesByMealTime["Breakfast"][randomBreakfastIndex]);
+        }
+        if (recipesByMealTime.ContainsKey("Lunch") && recipesByMealTime["Lunch"].Count > 0)
+        {
+            int randomLunchIndex = random.Next(recipesByMealTime["Lunch"].Count);
+            recipesOfTheDay.Add(recipesByMealTime["Lunch"][randomLunchIndex]);
+        }
+        if (recipesByMealTime.ContainsKey("Dinner") && recipesByMealTime["Dinner"].Count > 0)
+        {
+            int randomDinnerIndex = random.Next(recipesByMealTime["Dinner"].Count);
+            recipesOfTheDay.Add(recipesByMealTime["Dinner"][randomDinnerIndex]);
+        }
         
         List<ShortRecipe> displayedRecipes = new List<ShortRecipe>();
         foreach (Recipe recipe in recipesOfTheDay)
@@ -52,6 +63,7 @@ public class HomeController : ControllerBase
                 Author = _context.Users.AsNoTracking().First(user => user.Id == recipe.UserId).Username,
                 MealTime = recipe.MealTime,
                 Likes = recipe.Likes,
+                Thumbnail = LinkBuilder.BuildThumbnailLink(recipe.Id)
             });
         }
         return displayedRecipes.AsEnumerable();

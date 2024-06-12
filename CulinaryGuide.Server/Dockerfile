@@ -37,4 +37,5 @@ RUN dotnet publish CulinaryGuide.Server.csproj -c Release -o /backendApp
 FROM base AS final
 WORKDIR /backendApp
 COPY --from=publish /backendApp .
+COPY --from=build /src/CulinaryGuide.Server/wwwroot /backendApp/wwwroot
 ENTRYPOINT ["dotnet", "CulinaryGuide.Server.dll"]

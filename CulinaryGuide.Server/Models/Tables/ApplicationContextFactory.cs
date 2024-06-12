@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
+﻿namespace CulinaryGuide.Server.Models.Tables;
 
-namespace CulinaryGuide.Server.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 
 public class ApplicationContextFactory: IDesignTimeDbContextFactory<ApplicationContext>
 {

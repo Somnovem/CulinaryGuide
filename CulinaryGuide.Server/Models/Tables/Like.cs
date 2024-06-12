@@ -1,5 +1,4 @@
-﻿using CulinaryGuide.Server.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using CulinaryGuide.Server.Models.Tables;
 
 public class Like
 {

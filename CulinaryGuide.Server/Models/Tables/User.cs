@@ -1,4 +1,4 @@
-﻿namespace CulinaryGuide.Server.Models;
+﻿namespace CulinaryGuide.Server.Models.Tables;
 
 public class User
 {
