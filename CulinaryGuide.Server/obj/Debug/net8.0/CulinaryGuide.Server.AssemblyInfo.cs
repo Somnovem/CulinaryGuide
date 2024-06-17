@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CulinaryGuide.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d9d29bb6f465b4e3d783eafb78d777ec1b35a69a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a6b8357bf9330873085aa265259d117f03cc3545")]
 [assembly: System.Reflection.AssemblyProductAttribute("CulinaryGuide.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CulinaryGuide.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

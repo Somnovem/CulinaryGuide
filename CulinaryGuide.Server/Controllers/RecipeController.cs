@@ -4,6 +4,7 @@ using CulinaryGuide.Server.Models.DTOs;
 using CulinaryGuide.Server.Models.Requests;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Type = CulinaryGuide.Server.Models.Tables.Type;
 
 namespace CulinaryGuide.Server.Controllers
@@ -248,6 +249,74 @@ namespace CulinaryGuide.Server.Controllers
             _context.Recipes.Remove(recipe);
             await _context.SaveChangesAsync();
             return Ok("Recipe deleted successfully.");
+        }
+        
+        /// <summary>
+        /// Get all recipes of user
+        /// </summary>
+        /// <param name="Username">User's username</param>
+        /// <returns></returns>
+        [HttpGet("recipesOfUser")]
+        public IEnumerable<ShortRecipe> RecipesOfUser(string username)
+        {
+            Guid id = _context.Users.AsNoTracking().First(u => u.Username.Equals(username)).Id;
+            return _context.Recipes.AsNoTracking().Where(r => r.UserId == id).Select(recipe => new ShortRecipe ()
+            {
+                Id = recipe.Id,
+                Name = recipe.Name,
+                Calories = recipe.Calories,
+                Description = recipe.Description,
+                Type = _context.Types.AsNoTracking().First(type => type.Id == recipe.TypeId).Name,
+                Cuisine = _context.Cuisines.AsNoTracking().First(cuisine => cuisine.Id == recipe.CuisineId).Name,
+                Author = _context.Users.AsNoTracking().First(user => user.Id == recipe.UserId).Username,
+                MealTime = recipe.MealTime,
+                Likes = recipe.Likes,
+                Thumbnail = LinkBuilder.BuildThumbnailLink(recipe.Id)
+            }).AsEnumerable();
+        }
+        
+        /// <summary>
+        /// Search recipes by provided parameters
+        /// </summary>
+        /// <param name="query">Parameters of the search</param>
+        /// <returns></returns>
+        [HttpGet("search")]
+        public async Task<IEnumerable<ShortRecipe>> Search([FromQuery] RecipeQuery query)
+        {
+            IEnumerable<Recipe> recipes = await _context.Recipes.AsNoTracking().ToListAsync();
+            if (query.TypeId != null)
+                recipes = recipes.Where(r => r.TypeId == query.TypeId);
+            if (query.CuisineId != null)
+                recipes = recipes.Where(r => r.CuisineId == query.CuisineId);
+            if (!query.MealTime.IsNullOrEmpty())
+                recipes = recipes.Where(r => r.MealTime == query.MealTime);
+            if (query.MinCalories != null)
+                recipes = recipes.Where(r => r.Calories >= query.MinCalories);
+            if (query.MaxCalories != null)
+                recipes = recipes.Where(r => r.Calories <= query.MaxCalories);
+            if (!query.Name.IsNullOrEmpty())
+                recipes = recipes.Where(r => r.Name.Contains(query.Name!));
+            if (!query.Ingredients.IsNullOrEmpty())
+            {
+                foreach (string ingredient in query.Ingredients!.Split(", "))
+                {
+                    recipes = recipes.Where(r => r.Ingredients.Contains(ingredient));
+                }
+            }
+
+            return recipes.Select(recipe => new ShortRecipe ()
+            {
+                Id = recipe.Id,
+                Name = recipe.Name,
+                Calories = recipe.Calories,
+                Description = recipe.Description,
+                Type = _context.Types.AsNoTracking().First(type => type.Id == recipe.TypeId).Name,
+                Cuisine = _context.Cuisines.AsNoTracking().First(cuisine => cuisine.Id == recipe.CuisineId).Name,
+                Author = _context.Users.AsNoTracking().First(user => user.Id == recipe.UserId).Username,
+                MealTime = recipe.MealTime,
+                Likes = recipe.Likes,
+                Thumbnail = LinkBuilder.BuildThumbnailLink(recipe.Id)
+            }).AsEnumerable();
         }
     }
 }
